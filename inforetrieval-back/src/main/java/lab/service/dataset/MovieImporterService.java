@@ -1,20 +1,21 @@
 package lab.service.dataset;
 
+import io.micronaut.context.annotation.Requires;
 import lab.utils.StringUtils;
-import org.springframework.stereotype.Component;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.inject.Singleton;
 
 import java.io.*;
 
 @Singleton
-@Requires(beans = JdbcTemplate)
-public class MovieImporterSingleton implements MovieImporterService {
+@Requires(beans = JdbcTemplate.class)
+public class MovieImporterService {
 
-    private final JdbcTemplate jdbcTemplate
+    private final JdbcTemplate jdbcTemplate;
 
-    MovieImporterSingleton(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate
+    public MovieImporterService(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     private String resourcePath = "src/main/resources/dataset/";
@@ -35,7 +36,7 @@ public class MovieImporterSingleton implements MovieImporterService {
         return new BufferedWriter(fileStream);
     }
 
-    public void makeNewDataSet()  throws Exception {
+    public void makeNewDataSet() throws Exception {
 
         BufferedWriter writer = getWriteResource(newDataSet);
         BufferedReader reader = getReadResource(oldDataSet);
@@ -66,11 +67,4 @@ public class MovieImporterSingleton implements MovieImporterService {
     public void importMovies() {
 
     }
-}
-
-public interface MovieImporterService {
-    BufferedReader getReadResource(String file);
-    BufferedWriter getWriteResource(String file);
-    void makeNewDataSet();
-    void importMovies();
 }

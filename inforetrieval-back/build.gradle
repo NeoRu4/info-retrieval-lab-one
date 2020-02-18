@@ -32,6 +32,12 @@ dependencies {
     compile "javax.annotation:javax.annotation-api"
     compile "io.micronaut:micronaut-http-client"
     compile "io.micronaut:micronaut-http-server-netty"
+
+    compile "io.micronaut.configuration:micronaut-jdbc-tomcat"
+    compile 'org.postgresql:postgresql:42.2.10'
+    compile 'org.springframework:spring-jdbc:5.2.3.RELEASE'
+    compile "io.micronaut:micronaut-spring"
+
     compileOnly "io.micronaut:micronaut-inject-java"
     runtime "ch.qos.logback:logback-classic:1.2.3"
     testCompile "junit:junit:4.12"
