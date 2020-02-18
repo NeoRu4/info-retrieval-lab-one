@@ -1,0 +1,11 @@
+micronaut:
+    application:
+        name: inforetrieval
+datasources:
+    default:
+        url: jdbc:postgresql://localhost:5432/info_retrieval
+        username: postgress
+        password: change.me
+        driverClassName: org.postgresql.Driver
+        validationQuery: SELECT 1
+#        initSQL: SET search_path TO isfront

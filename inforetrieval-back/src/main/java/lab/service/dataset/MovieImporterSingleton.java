@@ -1,24 +1,21 @@
-package lab.dataset;
+package lab.service.dataset;
 
 import lab.utils.StringUtils;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Singleton;
+
 import java.io.*;
 
-public class MovieImporterSingleton {
+@Singleton
+@Requires(beans = JdbcTemplate)
+public class MovieImporterSingleton implements MovieImporterService {
 
-    private static MovieImporterSingleton movieImporterSingleton;
+    private final JdbcTemplate jdbcTemplate
 
-    private MovieImporterSingleton() { }
-
-    public static MovieImporterSingleton getInstance()
-    {
-        if (movieImporterSingleton == null) {
-            movieImporterSingleton = new MovieImporterSingleton();
-        }
-        return movieImporterSingleton;
+    MovieImporterSingleton(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate
     }
-
 
     private String resourcePath = "src/main/resources/dataset/";
     private String oldDataSet = "movie_titles_old.csv";
@@ -69,4 +66,11 @@ public class MovieImporterSingleton {
     public void importMovies() {
 
     }
+}
+
+public interface MovieImporterService {
+    BufferedReader getReadResource(String file);
+    BufferedWriter getWriteResource(String file);
+    void makeNewDataSet();
+    void importMovies();
 }
