@@ -1,21 +1,23 @@
 package lab.service.dataset;
 
-import io.micronaut.context.annotation.Requires;
+import lab.domain.Movie;
+import lab.service.MovieSearcherService;
 import lab.utils.StringUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.inject.Singleton;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Singleton
-@Requires(beans = JdbcTemplate.class)
 public class MovieImporterService {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final MovieSearcherService movieSearcherService;
 
-    public MovieImporterService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public MovieImporterService(JdbcTemplate jdbcTemplate, MovieSearcherService movieSearcherService) {
+        this.movieSearcherService = movieSearcherService;
     }
 
     private String resourcePath = "src/main/resources/dataset/";
@@ -45,7 +47,6 @@ public class MovieImporterService {
         writer.write("id;name;year");
         writer.newLine();
 
-        StringBuilder content = new StringBuilder();
         String line;
 
         while ((line = reader.readLine()) != null) {
@@ -64,7 +65,27 @@ public class MovieImporterService {
         writer.close();
     }
 
-    public void importMovies() {
+    public void importMovies() throws Exception {
+
+        BufferedReader reader = getReadResource(newDataSet);
+        reader.readLine();
+
+        List<Movie> listOfMovies = new ArrayList<Movie>();
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            String[] splited = line.split(";");
+            Long id = StringUtils.toLong(splited[0]);
+            String name = splited[1];
+            Long year = StringUtils.toLong(splited[2]);
+
+            listOfMovies.add(new Movie(id, name, year));
+        }
+
+        reader.close();
+
+        int[][] batch = movieSearcherService.batchInsert(listOfMovies, 50);
+        System.out.println(batch.toString());
 
     }
 }

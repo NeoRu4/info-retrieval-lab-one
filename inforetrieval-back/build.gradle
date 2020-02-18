@@ -24,8 +24,9 @@ dependencyManagement {
 }
 
 dependencies {
-    annotationProcessor "io.micronaut:micronaut-inject-java"
-    annotationProcessor "io.micronaut:micronaut-validation"
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.2.4.RELEASE', ext: 'pom'
+
     compile "io.micronaut:micronaut-inject"
     compile "io.micronaut:micronaut-validation"
     compile "io.micronaut:micronaut-runtime"
@@ -33,10 +34,18 @@ dependencies {
     compile "io.micronaut:micronaut-http-client"
     compile "io.micronaut:micronaut-http-server-netty"
 
+    annotationProcessor "io.micronaut:micronaut-inject-java"
+    annotationProcessor "io.micronaut:micronaut-validation"
+
     compile "io.micronaut.configuration:micronaut-jdbc-tomcat"
     compile 'org.postgresql:postgresql:42.2.10'
     compile 'org.springframework:spring-jdbc:5.2.3.RELEASE'
     compile "io.micronaut:micronaut-spring"
+
+    implementation 'io.micronaut:micronaut-validation'
+    implementation "io.micronaut.configuration:micronaut-hibernate-jpa"
+    implementation "io.micronaut.configuration:micronaut-jdbc-hikari"
+    runtime "com.h2database:h2"
 
     compileOnly "io.micronaut:micronaut-inject-java"
     runtime "ch.qos.logback:logback-classic:1.2.3"

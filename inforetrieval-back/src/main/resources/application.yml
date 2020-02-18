@@ -3,8 +3,8 @@ micronaut:
         name: inforetrieval
 datasources:
     default:
-        url: jdbc:postgresql://localhost:5432/info_retrieval
-        username: postgress
+        url: jdbc:postgresql://localhost:5433/info_retrieval
+        username: back
         password: change.me
         driverClassName: org.postgresql.Driver
         validationQuery: SELECT 1

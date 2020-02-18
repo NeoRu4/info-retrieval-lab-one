@@ -8,4 +8,12 @@ public class StringUtils {
         } catch (Exception error) {}
         return number;
     }
+
+    public static Long toLong(String intString) {
+        Long number = null;
+        try {
+            number = Long.parseLong(intString);
+        } catch (Exception error) {}
+        return number;
+    }
 }

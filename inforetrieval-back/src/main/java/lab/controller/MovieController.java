@@ -25,8 +25,9 @@ public class MovieController {
     public String importMovies() {
         try {
             this.movieImporterService.makeNewDataSet();
+            this.movieImporterService.importMovies();
         } catch (Exception exception) {
-            return "Error of creating";
+            return exception.getMessage();
         }
         return "Imported";
     }
