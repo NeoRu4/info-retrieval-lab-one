@@ -74,18 +74,22 @@ public class MovieImporterService {
         String line;
 
         while ((line = reader.readLine()) != null) {
+
             String[] splited = line.split(";");
             Long id = StringUtils.toLong(splited[0]);
             String name = splited[1];
             Long year = StringUtils.toLong(splited[2]);
 
-            listOfMovies.add(new Movie(id, name, year));
+            Movie movie = new Movie(id, name, year);
+
+            if (movie.isValid()) {
+                listOfMovies.add(movie);
+            }
         }
 
         reader.close();
 
-        int[][] batch = movieSearcherService.batchInsert(listOfMovies, 50);
-        System.out.println(batch.toString());
+        movieSearcherService.batchInsert(listOfMovies, 100);
 
     }
 }

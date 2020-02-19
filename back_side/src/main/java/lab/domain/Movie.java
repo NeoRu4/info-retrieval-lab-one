@@ -1,10 +1,14 @@
 package lab.domain;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lab.dto.Validatable;
+
 import javax.validation.constraints.NotNull;
 
 //@Table(name= "movie")
-public class Movie {
+public class Movie implements Validatable {
+
+    public Movie() {}
 
     public Movie(Long id, @NotNull String name, @NotNull Long year) {
         this.id = id;
@@ -12,18 +16,21 @@ public class Movie {
         this.year = year;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @NotNull
-    @Column(name = "year", nullable = false, unique = false)
     private Long year;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getYear() {
         return year;
@@ -41,11 +48,10 @@ public class Movie {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    @JsonIgnore
+    public Boolean isValid() {
+        return  getId() != null &&
+                getName() != null &&
+                getYear() != null;
     }
 }

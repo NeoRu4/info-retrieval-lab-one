@@ -1,6 +1,14 @@
 package lab.utils;
 
 public class StringUtils {
+
+    public static String toString(Object obj) {
+        try {
+            return obj.toString();
+        } catch (Exception exp) { }
+        return null;
+    }
+
     public static Integer toInteger(String intString) {
         Integer number = null;
         try {
