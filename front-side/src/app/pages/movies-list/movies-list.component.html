@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <div class="search">
+        <ui-input 
+            type="search" 
+            palceholder="Поиск" 
+            [formControl]="searchFormControl">
+        </ui-input>
+    </div>
+    <ng-container *ngTemplateOutlet="moviesList.length ? results : noResults"></ng-container>
+
+</div>
+
+<ng-template #results>
+    <div class="table">
+        <div class="head-row">
+            <div class="name">Название</div>
+            <div class="year">Год</div>
+        </div>
+        <div class="item" *ngFor="let movie of moviesList">
+            <div class="name">{{movie.name}}</div>
+            <div class="year">{{movie.year}}</div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #noResults>
+    <h2>
+        Ничего не найдено
+    </h2>
+</ng-template>

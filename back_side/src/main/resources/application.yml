@@ -1,6 +1,9 @@
 micronaut:
     application:
         name: inforetrieval
+    server:
+        cors:
+            enabled: true
 datasources:
     default:
         url: jdbc:postgresql://localhost:5433/info_retrieval

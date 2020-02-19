@@ -7,20 +7,20 @@ import lab.utils.EnumUtils;
 import lab.utils.StringUtils;
 
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 
 @Introspected
 public class MovieSearchDto {
 
     @Max(100)
-    @Positive
     @JsonProperty("max")
     private Integer max;
 
-    @Positive
+    @Min(0)
     @JsonProperty("offset")
     private Integer offset;
-    
+
     @JsonProperty("searchString")
     private String searchString;
 

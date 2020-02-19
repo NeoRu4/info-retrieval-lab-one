@@ -38,7 +38,7 @@ public class MovieSearcherService {
         if (searchString != null && !searchString.equals("")) {
             query += "WHERE name ILIKE ? OR CAST(year AS TEXT) ILIKE ? ";
             objects.add("%" + searchString + "%");
-            objects.add("%" + searchString + "%");
+            objects.add(searchString + "%");
         }
 
         ///////////////////
