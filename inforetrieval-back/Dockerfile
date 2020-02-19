@@ -1,4 +1,4 @@
-FROM openjdk:8u171-alpine3.7
-RUN apk --no-cache add curl
-COPY build/libs/*-all.jar inforetrieval.jar
-CMD java ${JAVA_OPTS} -jar inforetrieval.jar
+FROM adoptopenjdk/openjdk11-openj9:jdk-11.0.1.13-alpine-slim
+COPY build/libs/app-*-all.jar app.jar
+EXPOSE 8080
+CMD java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar app.jar
