@@ -17,7 +17,12 @@
             <div class="year">Год</div>
         </div>
         <div class="item" *ngFor="let movie of moviesList">
-            <div class="name">{{movie.name}}</div>
+            <div class="name">
+                <a  target="__blank"
+                    href="https://www.imdb.com/title/tt{{movie.id.toString().padStart(7, '0')}}">
+                    {{movie.name}}
+                </a>
+            </div>
             <div class="year">{{movie.year}}</div>
         </div>
     </div>
