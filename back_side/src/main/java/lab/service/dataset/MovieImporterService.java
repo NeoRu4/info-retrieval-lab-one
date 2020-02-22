@@ -79,7 +79,8 @@ public class MovieImporterService {
 
             String[] splited = line.split(";");
             Long id = StringUtils.toLong(splited[0]);
-            String name = splited[1];
+
+            String name = splited[1].replaceAll("^[-]{1,}", "").trim();
 
             Long year = null;
             Long _year = StringUtils.toLong(splited[2]);
