@@ -13,7 +13,7 @@ export class HttpQueryService {
               private storage: StorageService) {
 
       if (!storage.baseUrl) {
-        storage.baseUrl = 'http://192.168.1.2:8080';
+        storage.baseUrl = 'http://neoru4.ddns.net:8080';
       }
   }
 

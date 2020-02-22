@@ -23,6 +23,15 @@
         padding: 15px;
         width: 100%;
         background-color: #ff53a39f;
+
+        span[class*="icon"] {
+            display: inline-flex;
+            font-size: 10px;
+            
+            &.up {
+                transform: rotate(-180deg);
+            }
+        }
     }
 
     .item {

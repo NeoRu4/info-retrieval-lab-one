@@ -6,7 +6,7 @@ public class EnumUtils {
 
         if( c != null && string != null ) {
             try {
-                return Enum.valueOf(c, string.trim().toUpperCase());
+                return Enum.valueOf(c, string.trim());
             } catch(IllegalArgumentException ex) {
             }
         }

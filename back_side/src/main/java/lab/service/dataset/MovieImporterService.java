@@ -1,4 +1,4 @@
-package lab.service.dataset;
+    package lab.service.dataset;
 
 import lab.domain.Movie;
 import lab.service.MovieSearcherService;
@@ -67,6 +67,8 @@ public class MovieImporterService {
 
     public void importMovies() throws Exception {
 
+        movieSearcherService.clearMoviesTable();
+
         BufferedReader reader = getReadResource(newDataSet);
         reader.readLine();
 
@@ -78,7 +80,13 @@ public class MovieImporterService {
             String[] splited = line.split(";");
             Long id = StringUtils.toLong(splited[0]);
             String name = splited[1];
-            Long year = StringUtils.toLong(splited[2]);
+
+            Long year = null;
+            Long _year = StringUtils.toLong(splited[2]);
+
+            if (_year != null) {
+                year = Math.abs(_year);
+            }
 
             Movie movie = new Movie(id, name, year);
 

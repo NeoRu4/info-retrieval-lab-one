@@ -53,8 +53,7 @@ public class MovieSearcherService {
             orderField = "year";
         }
 
-        query += "ORDER BY ? " + orderBy;
-        objects.add(orderField);
+        query += "ORDER BY " + orderField + " " + orderBy;
 
         ///////////////////
         if (params.getMax() == null) {
@@ -89,6 +88,10 @@ public class MovieSearcherService {
         );
 
         return movies;
+    }
+
+    public void clearMoviesTable() {
+        jdbcTemplate.execute("DELETE FROM movies");
     }
 
 //    @Transactional

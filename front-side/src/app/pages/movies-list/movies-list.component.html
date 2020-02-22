@@ -13,8 +13,20 @@
 <ng-template #results>
     <div class="table">
         <div class="head-row">
-            <div class="name">Название</div>
-            <div class="year">Год</div>
+            <div class="name" (click)="setOrder('name')">Название
+                <span class="icon-triangle-down"
+                *ngIf="sortInfo.field=='name'"
+                [class.up]="sortInfo.field=='name' && sortInfo.order=='asc'">
+                </span> 
+            </div>
+            <div class="year"
+            (click)="setOrder('year')">
+                Год
+                <span class="icon-triangle-down"
+                    *ngIf="sortInfo.field=='year'"
+                    [class.up]="sortInfo.field=='year' && sortInfo.order=='asc'">
+                </span> 
+            </div>
         </div>
         <div class="item" *ngFor="let movie of moviesList">
             <div class="name">
