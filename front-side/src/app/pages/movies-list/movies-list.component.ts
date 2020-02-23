@@ -38,7 +38,6 @@ export class MoviesListComponent implements OnInit, OnDestroy {
     this.searchFormControl.valueChanges.pipe(
       debounceTime(600),
       mergeMap(() => this.searchMovie()),
-      takeUntil(this.$unSubscriber),
     ).subscribe()
 
     this.searchFormControl.setValue('');
@@ -56,12 +55,12 @@ export class MoviesListComponent implements OnInit, OnDestroy {
 
   setOrder(field: string) {
 
-      this.$unSubscriber.next();
-
-      this.sortInfo.field = field;
-      this.sortInfo.order = this.sortInfo.order == 'desc' ? 'asc' : 'desc';
-      
-      this.searchMovie().subscribe();
+    this.$unSubscriber.next();
+    
+    this.sortInfo.field = field;
+    this.sortInfo.order = this.sortInfo.order == 'desc' ? 'asc' : 'desc';
+    
+    this.searchMovie().subscribe();
   }
 
 }
