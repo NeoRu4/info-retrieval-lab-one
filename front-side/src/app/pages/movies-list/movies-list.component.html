@@ -6,7 +6,11 @@
             [formControl]="searchFormControl">
         </ui-input>
     </div>
-    <ng-container *ngTemplateOutlet="moviesList.length ? results : noResults"></ng-container>
+    <div [ngSwitch]="componentState">
+        <ng-container *ngSwitchCase="'loading'" [ngTemplateOutlet]="loading"></ng-container>
+        <ng-container *ngSwitchCase="'results'" [ngTemplateOutlet]="results"></ng-container>
+        <ng-container *ngSwitchCase="'noResults'" [ngTemplateOutlet]="noResults"></ng-container>
+    </div>
 
 </div>
 
@@ -41,7 +45,11 @@
 </ng-template>
 
 <ng-template #noResults>
-    <h2>
+    <h2 class="no-results">
         Ничего не найдено
     </h2>
+</ng-template>
+
+<ng-template #loading>
+    <ui-loader></ui-loader>
 </ng-template>

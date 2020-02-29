@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UiInputModule } from 'src/app/components/ui-input';
 import { MoviesListComponent } from './movies-list.component';
 import { CommonModule } from '@angular/common';
+import { UiLoaderModule } from 'src/app/components/ui-loader';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     UiInputModule,
-    CommonModule
+    CommonModule,
+    UiLoaderModule
   ]
 })
 export class MoviesListModule { }

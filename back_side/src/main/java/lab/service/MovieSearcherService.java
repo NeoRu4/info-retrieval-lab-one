@@ -24,6 +24,8 @@ public class MovieSearcherService {
 
     private JdbcTemplate jdbcTemplate;
 
+    public static String DATE_FORAMT = "([12][0-9]{3})";
+
     public MovieSearcherService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -35,10 +37,27 @@ public class MovieSearcherService {
 
         ///////////////////
         String searchString = params.getSearchString();
+
         if (searchString != null && !searchString.equals("")) {
-            query += "WHERE name ILIKE ? OR CAST(year AS TEXT) ILIKE ? ";
-            objects.add("%" + searchString + "%");
-            objects.add(searchString + "%");
+
+            String searchDate = searchString.replaceAll("[^0-9]{1,4}", "");
+            String searchName = searchString;
+
+            Boolean isDateMatch = false;
+
+            if (searchDate.matches(DATE_FORAMT)) {
+                isDateMatch = true;
+                searchName = searchName.replaceAll(DATE_FORAMT, "");
+            }
+
+            query += "WHERE name ILIKE ? ";
+            objects.add("%" + searchName + "%");
+
+            if (isDateMatch) {
+                query += "AND CAST(year AS TEXT) ILIKE ? ";
+                objects.add(searchDate + "%");
+            }
+
         }
 
         ///////////////////

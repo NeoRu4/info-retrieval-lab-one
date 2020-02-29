@@ -24,6 +24,8 @@ export class MoviesListComponent implements OnInit, OnDestroy {
     order: 'desc'
   }
 
+  componentState: 'results' | 'noResults' | 'loading' = 'loading';
+
   ngOnInit(): void {
     this.subToFormsControl();
   }
@@ -45,10 +47,13 @@ export class MoviesListComponent implements OnInit, OnDestroy {
 
   searchMovie(): Observable<any> {
 
+    this.componentState = 'loading';
+
     return this.httpQuery.getListMovies(this.searchFormControl.value, 100, 0, this.sortInfo.order, this.sortInfo.field).pipe(
       takeUntil(this.$unSubscriber),
       map(movies => {
-        this.moviesList = movies;
+        this.moviesList = movies || [];
+        this.componentState = (this.moviesList.length ? 'results' : 'noResults');
       })
     );
   }
