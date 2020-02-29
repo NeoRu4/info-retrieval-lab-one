@@ -27,7 +27,8 @@
         span[class*="icon"] {
             display: inline-flex;
             font-size: 10px;
-            
+            vertical-align: middle;
+            margin-left: 5px;
             &.up {
                 transform: rotate(-180deg);
             }
