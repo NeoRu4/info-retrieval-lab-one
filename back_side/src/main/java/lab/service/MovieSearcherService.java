@@ -40,14 +40,14 @@ public class MovieSearcherService {
 
         if (searchString != null && !searchString.equals("")) {
 
-            String searchDate = searchString.replaceAll("[^0-9]{1,4}", "");
-            String searchName = searchString;
+            String searchDate = searchString.replaceAll("[^0-9]{1,4}", "").trim();
+            String searchName = searchString.trim();
 
             Boolean isDateMatch = false;
 
             if (searchDate.matches(DATE_FORAMT)) {
                 isDateMatch = true;
-                searchName = searchName.replaceAll(DATE_FORAMT, "");
+                searchName = searchName.replaceAll(DATE_FORAMT, "").trim();
             }
 
             query += "WHERE name ILIKE ? ";
