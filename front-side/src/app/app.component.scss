@@ -13,3 +13,9 @@ h1 {
 movies-list {
     padding: 0 10%;
 }
+
+@media (max-width: 600px) {
+    movies-list {
+        padding: 0;
+    }
+  }
