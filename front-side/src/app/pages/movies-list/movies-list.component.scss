@@ -22,7 +22,7 @@
         flex-direction: row;
         padding: 15px;
         width: 100%;
-        background-color: #ff53a39f;
+        background-color: rgb(255,83,163);
 
         span[class*="icon"] {
             display: inline-flex;
@@ -40,10 +40,10 @@
         flex-direction: row;
         padding: 15px;
         width: 100%;
-        background-color: #fca6ce9f;
+        background-color: rgb(252,166,206);
 
         &:hover {
-            background-color: #fa80b99f;
+            background-color: rgb(250,128,185);
         }
     }
 
