@@ -36,12 +36,12 @@ public class MovieSearcherService {
         ArrayList<Object> objects = new ArrayList<Object>();
 
         ///////////////////
-        String searchString = params.getSearchString();
+        String searchString = params.getSearchString().trim();
 
         if (searchString != null && !searchString.equals("")) {
 
             String searchDate = searchString.replaceAll("[^0-9]{1,4}", "").trim();
-            String searchName = searchString.trim();
+            String searchName = searchString;
 
             Boolean isDateMatch = false;
 
