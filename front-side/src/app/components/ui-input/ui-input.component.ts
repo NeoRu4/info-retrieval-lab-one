@@ -24,9 +24,12 @@ export class UiInputComponent implements OnInit {
 
   @Input('ngModel') 
   sharedVar: string = '';
+  
+  isIconType: boolean = false;
+  iconTypes = ['search'];
 
   ngOnInit(): void {
-
+    this.isIconType = this.iconTypes.includes(this.type);
   }
 
   onModelChanges($event) {
