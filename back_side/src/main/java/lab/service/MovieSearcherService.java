@@ -50,8 +50,8 @@ public class MovieSearcherService {
                 searchName = searchName.replaceAll(DATE_FORAMT, "").trim();
             }
 
-            query += "WHERE name ILIKE ? ";
-            objects.add("%" + searchName + "%");
+            query += "WHERE ";
+            query += _splitSearchStringToQuery(objects, searchName);
 
             if (isDateMatch) {
                 query += "AND CAST(year AS TEXT) ILIKE ? ";
@@ -108,6 +108,30 @@ public class MovieSearcherService {
 
         return movies;
     }
+
+    private String _splitSearchStringToQuery(ArrayList<Object> objects, String searchString) {
+
+        String query = "";
+        String[] splitedString = searchString.split(" ");
+        int size = splitedString.length;
+
+        String condition = "AND ";
+
+        for (int i = 0; i < size; i++) {
+
+            String str = splitedString[i];
+
+            if (i == size - 1) {
+                condition = "";
+            }
+
+            query += "name ILIKE ? " + condition;
+            objects.add("%" + str + "%");
+        }
+
+        return query;
+    }
+
 
     public void clearMoviesTable() {
         jdbcTemplate.execute("DELETE FROM movies");
